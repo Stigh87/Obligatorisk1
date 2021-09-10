@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+
+    <script src="controller.js"></script>
+    <script>
+
+        //Model - Deklarer (vis frem) variabler som skal benyttes. 
+        //    Men ikke gi dem en verdi. Det gjøres i hver eneklt test.
+
+        let numbers;
+        let chosenBar = "";
+        let inputValue;
+        let disabled = "disabled";
+
+
+        show();
+        function show() { }
+        //View - Her må vi legge inn en dummy versjon av "updateview" (for modul 1 og 2), om vi bruker MVC.
+        //   function updateviw() / show() osv...
+
+
+
+        QUnit.test("velge stolpe", function (assert) {
+            // chosenBar = element;
+            chosenBar = "";
+            mark(2)
+            let actual = chosenBar;
+            let expected = 2;
+            assert.equal(actual, expected);
+        });
+
+        QUnit.test("velge stolpe og deselect", function (assert) {
+            // chosenBar = element;
+            chosenBar = "";
+            mark(2);
+            mark(2);
+            let actual = chosenBar;
+            let expected = "";
+            assert.equal(actual, expected);
+        });
+
+        QUnit.test("velge stolpe, til en annen", function (assert) {
+            // chosenBar = element;
+            chosenBar = 2;
+            mark(4);
+            let actual = chosenBar;
+            let expected = 4;
+            assert.equal(actual, expected);
+        });
+
+
+        QUnit.test("enable", function (assert) {
+            // chosenBar = element;
+            chosenBar = "";
+            mark(2);
+            let actual = disabled;
+            let expected = "";
+            assert.equal(actual, expected);
+        });
+
+        QUnit.test("enable / disable", function (assert) {
+            // chosenBar = element;
+            chosenBar = 2;
+            mark(2);
+            let actual = disabled;
+            let expected = disabled;
+            assert.equal(actual, expected);
+        });
+
+
+        QUnit.test("slette en stolpe", function (assert) {
+            // chosenBar = element;
+            numbers = [7, 3, 1, 9, 10];
+            chosenBar = "";
+            mark(4);
+            remove(4);
+            let actual = numbers;
+            let expected = [7, 3, 1, 10];
+            assert.deepEqual(actual, expected);
+        });
+
+        QUnit.test("endre en stolpe", function (assert) {
+            // chosenBar = element;
+            numbers = [7, 3, 1, 9, 10];
+            chosenBar = "";
+            mark(4);
+            inputValue = 10;
+            change(4);
+            let actual = numbers;
+            let expected = [7, 3, 1, 10, 10];
+            assert.deepEqual(actual, expected);
+        });
+
+        QUnit.test("legge til en stolpe", function (assert) {
+            numbers = [7, 3, 1, 9, 10];
+            inputValue = 5;
+            newBar()
+            let actual = numbers;
+            let expected = [7, 3, 1, 9, 10, 5];
+            assert.deepEqual(actual, expected);
+        });
+
+        // QUnit.test("for høy verdi", function (assert) {
+        //     // chosenBar = element;
+        //     numbers = [7, 3, 1, 9, 10];
+        //     chosenBar = "";
+        //     mark(4);
+        //     inputValue = 11;
+        //     change(4);
+        //     let actual = numbers;
+        //     let expected = [7, 3, 1, 9, 10];
+        //     assert.deepEqual(actual, expected);
+        // });
+
+        // QUnit.test("for lav verdi", function (assert) {
+        //     // chosenBar = element;
+        //     numbers = [7, 3, 1, 9, 10];
+        //     chosenBar = "";
+        //     mark(4);
+        //     inputValue = 0, 9;
+        //     change(4);
+        //     let actual = numbers;
+        //     let expected = [7, 3, 1, 9, 10];
+        //     assert.deepEqual(actual, expected);
+        // });
+
+
+
+
+    </script>
+</body>
+
+</html>
